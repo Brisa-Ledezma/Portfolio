@@ -15,8 +15,7 @@ Un portfolio que se sienta actual y con identidad propia: tipografía protagonis
 | 5 | API de contacto | `feature/contact-api` | El formulario guarda el mensaje y envía un mail de aviso | Pendiente |
 | 6 | Seguridad | `feature/security-hardening` | Controles de [SECURITY.md](SECURITY.md) implementados | Pendiente |
 | 7 | Secciones del front | una rama `feature/` por sección | Sitio completo en español e inglés, responsive y accesible | Pendiente |
-| 8 | CI/CD | `chore/ci-pipeline` | Lint, tests y build en cada push; despliegue desde `main` | Pendiente |
-| 9 | Despliegue | `chore/deploy` | Sitio público en la nube | Pendiente |
+| 8 | Despliegue | `chore/deploy` | Sitio público en la nube, publicado desde `main` | Pendiente |
 
 ## Secciones del sitio
 
@@ -37,7 +36,7 @@ Un portfolio que se sienta actual y con identidad propia: tipografía protagonis
 - **Seguridad:** todos los controles de [SECURITY.md](SECURITY.md) en estado "Hecho" antes del despliegue.
 - **Historial:** ramas y commits según [BRANCHING.md](BRANCHING.md).
 
-## Hosting
+## Hosting (propuesto, a confirmar)
 
 | Parte | Servicio | Límite del plan gratuito |
 |---|---|---|
