@@ -1,0 +1,31 @@
+# Dependencias
+node_modules/
+
+# Builds
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Variables de entorno (nunca se versionan; ver .env.example)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Tests end-to-end
+playwright-report/
+test-results/
+
+# Editor / sistema operativo
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Herramientas locales
+.claude/
