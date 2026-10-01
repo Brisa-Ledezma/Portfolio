@@ -62,7 +62,6 @@ Se usa [Conventional Commits](https://www.conventionalcommits.org/es/):
 | `refactor` | Cambio interno que no altera el comportamiento |
 | `test` | Tests |
 | `chore` | Configuración, dependencias, tareas de mantenimiento |
-
 | `perf` | Mejora de rendimiento |
 
 Alcances: `front`, `back`, `docker`, `repo`.
