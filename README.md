@@ -19,8 +19,8 @@ Portfolio/
 |---|---|
 | Front | Vite, React, TypeScript, Tailwind CSS, GSAP, Motion, Lenis |
 | Back | NestJS, TypeScript, PostgreSQL |
-| Infraestructura | Docker, Docker Compose, GitHub Actions |
-| Hosting | Cloudflare Pages (front), Render (back), Neon (base de datos) |
+| Infraestructura | Docker, Docker Compose |
+| Hosting (propuesto, a confirmar) | Cloudflare Pages (front), Render (back), Neon (base de datos) |
 
 ## Requisitos
 
@@ -28,6 +28,30 @@ Portfolio/
 - [Git](https://git-scm.com/)
 
 No hace falta instalar Node ni PostgreSQL: corren dentro de los contenedores.
+
+## Cómo levantarlo
+
+```bash
+git clone https://github.com/Brisa-Ledezma/Portfolio.git
+cd Portfolio
+cp .env.example .env        # y completar la clave de la base de datos
+docker compose up --build
+```
+
+| Servicio | URL |
+|---|---|
+| Front | http://localhost:5173 |
+| API | http://localhost:3000/health |
+| PostgreSQL | `localhost:5432` (solo desde esta máquina) |
+
+Los cambios en `front/` y `back/` se recargan solos. Para detener todo: `docker compose down`. Los datos de la base quedan guardados en el volumen `db_data`; para borrarlos también, `docker compose down -v`.
+
+### Imágenes de producción
+
+```bash
+docker build --target prod -t portfolio-front ./front
+docker build --target prod -t portfolio-back ./back
+```
 
 ## Documentación
 
