@@ -29,3 +29,9 @@ Thumbs.db
 
 # Herramientas locales
 .claude/
+
+# Material personal de referencia (CVs, exportes de LinkedIn). Nunca se versiona.
+/cv/
+/CV/
+/cvs/
+/private/

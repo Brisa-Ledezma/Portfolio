@@ -17,10 +17,10 @@ Portfolio/
 
 | Capa | Tecnologías |
 |---|---|
-| Front | Vite, React, TypeScript, Tailwind CSS, GSAP, Motion, Lenis |
-| Back | NestJS, TypeScript, PostgreSQL |
+| Front | Vite, React, TypeScript, Tailwind CSS, GSAP, Motion, Lenis, TanStack Query |
+| Back | Node.js, NestJS, TypeScript, Prisma, PostgreSQL, WebSocket |
 | Infraestructura | Docker, Docker Compose |
-| Hosting (propuesto, a confirmar) | Cloudflare Pages (front), Render (back), Neon (base de datos) |
+| Hosting | A definir (se evalúan Vercel, Cloudflare Pages, Render y Neon) |
 
 ## Requisitos
 
