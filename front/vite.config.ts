@@ -12,5 +12,6 @@ export default defineConfig({
     // Necesario para que el servidor sea accesible desde fuera del contenedor.
     host: true,
     port: 5173,
+    watch: { usePolling: process.env.VITE_USE_POLLING === 'true' },
   },
 })
