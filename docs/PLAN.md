@@ -9,12 +9,12 @@ Un portfolio que se sienta actual y con identidad propia: tipografía protagonis
 | # | Fase | Rama | Resultado | Estado |
 |---|---|---|---|---|
 | 1 | Base del repositorio | `main`, `docs/project-foundations` | Git, convenciones y documentación inicial | Hecho |
-| 2 | Estructura de las aplicaciones | `chore/front-scaffold`, `chore/back-scaffold` | Front y back arrancan con su configuración base | En curso |
-| 3 | Docker | `chore/docker-setup` | `docker compose up` levanta front, back y base de datos | Pendiente |
+| 2 | Estructura de las aplicaciones | `chore/front-scaffold`, `chore/back-scaffold` | Front y back arrancan con su configuración base | Hecho |
+| 3 | Docker | `chore/docker-setup` | `docker compose up` levanta front, back y base de datos | Hecho |
 | 4 | Dirección de diseño | `feature/design-system` | Paleta, tipografías, tokens y lenguaje de movimiento | Pendiente |
-| 5 | API | `feature/content-api`, `feature/contact-api` | Contenido del portfolio y formulario de contacto | Pendiente |
+| 5 | API de contacto | `feature/contact-api` | El formulario guarda el mensaje y envía un mail de aviso | Pendiente |
 | 6 | Seguridad | `feature/security-hardening` | Controles de [SECURITY.md](SECURITY.md) implementados | Pendiente |
-| 7 | Secciones del front | una rama `feature/` por sección | Sitio completo, responsive y accesible | Pendiente |
+| 7 | Secciones del front | una rama `feature/` por sección | Sitio completo en español e inglés, responsive y accesible | Pendiente |
 | 8 | CI/CD | `chore/ci-pipeline` | Lint, tests y build en cada push; despliegue desde `main` | Pendiente |
 | 9 | Despliegue | `chore/deploy` | Sitio público en la nube | Pendiente |
 
