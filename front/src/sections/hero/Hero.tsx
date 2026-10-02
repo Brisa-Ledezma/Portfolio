@@ -1,5 +1,6 @@
 import { useMotionValue, useSpring, useTransform } from 'motion/react'
 import { useRef, type PointerEvent } from 'react'
+import { Link } from 'react-router'
 import { profile } from '@/content'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { useLanguage } from '@/providers/language'
@@ -73,7 +74,6 @@ export function Hero() {
 
   return (
     <section
-      id="top"
       ref={scope}
       onPointerMove={onPointerMove}
       className="relative isolate flex min-h-[100dvh] flex-col justify-end overflow-hidden"
@@ -81,11 +81,11 @@ export function Hero() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div
           data-blob="a"
-          className="absolute -left-[10%] top-[8%] size-[55vmax] rounded-full bg-(--blob-a) opacity-25 blur-[110px] dark:opacity-40"
+          className="absolute -left-[10%] top-[8%] size-[55vmax] rounded-full bg-(--blob-a) opacity-25 blur-[110px] dark:opacity-30"
         />
         <div
           data-blob="b"
-          className="absolute -right-[12%] bottom-[-10%] size-[48vmax] rounded-full bg-(--blob-b) opacity-30 blur-[120px] dark:opacity-35"
+          className="absolute -right-[12%] bottom-[-10%] size-[48vmax] rounded-full bg-(--blob-b) opacity-30 blur-[120px] dark:opacity-15"
         />
       </div>
 
@@ -112,18 +112,18 @@ export function Hero() {
           </p>
 
           <div data-reveal className="flex shrink-0 gap-3">
-            <a
-              href="#projects"
+            <Link
+              to="/projects"
               className="rounded-full bg-accent px-6 py-3 text-sm font-medium text-on-accent transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
             >
               {t.hero.primaryCta}
-            </a>
-            <a
-              href="#contact"
+            </Link>
+            <Link
+              to="/contact"
               className="rounded-full border border-ink/25 px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-ink active:scale-[0.98]"
             >
               {t.hero.secondaryCta}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -15,24 +15,28 @@
   --line: rgb(42 26 28 / 0.14);
   --accent: #6e1f2b;
   --on-accent: #f6f0e4;
-  --olive: #5c6140;
+  --secondary: #5c6140;
+  --block: #6e1f2b;
+  --on-block: #f6f0e4;
   --blob-a: #8a2d3b;
   --blob-b: #7f8559;
   color-scheme: light;
 }
 
-/* Tema oscuro: bordó casi negro con dorado apagado. */
+/* Tema oscuro: casi negro neutro, con bordó y dorado apagado. Sin oliva. */
 [data-theme='dark'] {
-  --bg: #170e10;
-  --surface: #23151a;
-  --ink: #ede4d3;
-  --ink-muted: #ab9c8e;
-  --line: rgb(237 228 211 / 0.14);
+  --bg: #121113;
+  --surface: #1b1a1d;
+  --ink: #ece7dd;
+  --ink-muted: #a29c94;
+  --line: rgb(236 231 221 / 0.13);
   --accent: #c9a66b;
-  --on-accent: #1d1113;
-  --olive: #9aa076;
+  --on-accent: #151315;
+  --secondary: #8f3345;
+  --block: #5a1a26;
+  --on-block: #f2ece0;
   --blob-a: #6e1f2b;
-  --blob-b: #4b5033;
+  --blob-b: #7a6034;
   color-scheme: dark;
 }
 
@@ -48,7 +52,9 @@
   --color-line: var(--line);
   --color-accent: var(--accent);
   --color-on-accent: var(--on-accent);
-  --color-olive: var(--olive);
+  --color-secondary: var(--secondary);
+  --color-block: var(--block);
+  --color-on-block: var(--on-block);
 
   --animate-marquee-up: marquee-up 38s linear infinite;
   --animate-marquee-down: marquee-down 46s linear infinite;

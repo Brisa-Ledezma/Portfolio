@@ -27,7 +27,7 @@ export function StackMarquee({ x, y }: StackMarqueeProps) {
         >
           {/* La lista se duplica para que el ciclo no tenga corte. */}
           {[...words, ...words].map((word, i) => (
-            <li key={i} className={i % 3 === 1 ? 'text-olive/45' : 'text-ink/10'}>
+            <li key={i} className={i % 3 === 1 ? 'text-secondary/45' : 'text-ink/10'}>
               {word}
             </li>
           ))}
