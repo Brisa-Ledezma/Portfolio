@@ -17,7 +17,7 @@ Portfolio/
 
 | Capa | Tecnologías |
 |---|---|
-| Front | Vite, React, TypeScript, Tailwind CSS, GSAP, Motion, Lenis, TanStack Query |
+| Front | Vite, React, TypeScript, Tailwind CSS, React Router, GSAP, Motion, Lenis, TanStack Query |
 | Back | Node.js, NestJS, TypeScript, Prisma, PostgreSQL, WebSocket |
 | Infraestructura | Docker, Docker Compose |
 | Hosting | A definir (se evalúan Vercel, Cloudflare Pages, Render y Neon) |
@@ -60,6 +60,7 @@ docker build --target prod -t portfolio-back ./back
 | [docs/PLAN.md](docs/PLAN.md) | Fases de implementación y secciones del sitio |
 | [docs/BRANCHING.md](docs/BRANCHING.md) | Flujo de ramas y convención de commits |
 | [docs/SECURITY.md](docs/SECURITY.md) | Controles de seguridad según OWASP Top 10 |
+| [docs/DESIGN.md](docs/DESIGN.md) | Colores, tipografías, movimiento y páginas |
 
 ## Autora
 

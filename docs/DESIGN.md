@@ -2,7 +2,7 @@
 
 ## Dirección
 
-Portfolio editorial y cálido: tipografía grande como protagonista, una paleta apagada de bordó, beige y oliva, y movimiento lento y continuo. Sin colores saturados.
+Portfolio editorial y cálido: tipografía grande como protagonista, una paleta apagada y movimiento lento y continuo. Sin colores saturados. El tema claro combina beige, bordó y oliva; el oscuro, un casi negro neutro con bordó y dorado, sin oliva.
 
 ## Colores
 
@@ -10,13 +10,15 @@ Los colores son variables CSS definidas en [front/src/index.css](../front/src/in
 
 | Token | Uso | Claro | Oscuro |
 |---|---|---|---|
-| `bg` | Fondo de página | `#f2ece0` beige papel | `#170e10` bordó casi negro |
-| `surface` | Bloques y tarjetas | `#e7decd` | `#23151a` |
-| `ink` | Texto principal | `#2a1a1c` | `#ede4d3` |
-| `ink-muted` | Texto secundario | `#65544f` | `#ab9c8e` |
+| `bg` | Fondo de página | `#f2ece0` beige papel | `#121113` casi negro neutro |
+| `surface` | Bloques y tarjetas | `#e7decd` | `#1b1a1d` |
+| `ink` | Texto principal | `#2a1a1c` | `#ece7dd` |
+| `ink-muted` | Texto secundario | `#65544f` | `#a29c94` |
 | `accent` | Énfasis y botón principal | `#6e1f2b` bordó | `#c9a66b` dorado apagado |
-| `on-accent` | Texto sobre el acento | `#f6f0e4` | `#1d1113` |
-| `olive` | Detalles secundarios | `#5c6140` | `#9aa076` |
+| `on-accent` | Texto sobre el acento | `#f6f0e4` | `#151315` |
+| `secondary` | Detalles secundarios | `#5c6140` oliva | `#8f3345` bordó claro |
+| `block` | Bloque destacado de contacto | `#6e1f2b` bordó | `#5a1a26` bordó |
+| `on-block` | Texto sobre el bloque | `#f6f0e4` | `#f2ece0` |
 | `line` | Bordes y divisores | tinta al 14 % | beige al 14 % |
 
 Reglas:
@@ -52,3 +54,16 @@ Reglas:
 ## Idiomas
 
 Todo el texto visible vive en [front/src/content/index.ts](../front/src/content/index.ts), en español e inglés. El idioma inicial sigue al navegador y el selector guarda la elección.
+
+## Páginas
+
+El sitio no es una landing de una sola pantalla: tiene cuatro páginas con transición entre ellas.
+
+| Ruta | Página | Contenido |
+|---|---|---|
+| `/` | Inicio | Hero animado, lista de proyectos, presentación breve y bloque de contacto |
+| `/projects` | Proyectos | Cada proyecto con qué resuelve, qué parte hice y con qué tecnologías |
+| `/about` | Sobre mí | Presentación, experiencia, formación y stack |
+| `/contact` | Contacto | Mail, LinkedIn y GitHub |
+
+Las rutas se definen en [front/src/App.tsx](../front/src/App.tsx) y la estructura común (encabezado, transición, pie) en [front/src/components/layout/Layout.tsx](../front/src/components/layout/Layout.tsx).
