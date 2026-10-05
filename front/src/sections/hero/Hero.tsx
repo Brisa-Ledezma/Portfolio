@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 import { profile } from '@/content'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { useLanguage } from '@/providers/language'
-import { RoleRotator } from './RoleRotator'
+import { RoleList } from './RoleList'
 import { StackMarquee } from './StackMarquee'
 
 function SplitWord({ word, className }: { word: string; className?: string }) {
@@ -37,36 +37,37 @@ export function Hero() {
     pointerY.set((event.clientY - rect.top) / rect.height - 0.5)
   }
 
+  // Entrada: el nombre sube letra por letra, la línea dorada se traza
+  // y los roles se descubren uno detrás de otro.
   useGSAP(
     () => {
       const mm = gsap.matchMedia()
-
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        // Entrada: el nombre sube letra por letra y después aparece el resto.
         gsap
           .timeline({ defaults: { ease: 'power4.out' } })
           .from('[data-char]', { yPercent: 115, duration: 1.1, stagger: 0.045 })
-          .from('[data-reveal]', { y: 24, autoAlpha: 0, duration: 0.8, stagger: 0.12 }, '-=0.55')
+          .from('[data-line]', { scaleX: 0, duration: 1.2, ease: 'power3.inOut' }, '-=0.7')
+          .from(
+            '[data-role]',
+            { clipPath: 'inset(0 100% 0 0)', duration: 0.7, stagger: 0.18, ease: 'power2.out' },
+            '-=0.9',
+          )
+          .from('[data-role-star]', { scale: 0, rotate: -90, duration: 0.5, stagger: 0.18 }, '<0.2')
+          .from('[data-reveal]', { y: 24, autoAlpha: 0, duration: 0.8, stagger: 0.12 }, '-=0.6')
+      })
+    },
+    { scope, dependencies: [language], revertOnUpdate: true },
+  )
 
-        // Fondo: dos manchas de color que derivan lento, para que el hero nunca quede quieto.
-        gsap.to('[data-blob="a"]', {
-          xPercent: 22,
-          yPercent: -14,
-          scale: 1.15,
-          duration: 16,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-        })
-        gsap.to('[data-blob="b"]', {
-          xPercent: -18,
-          yPercent: 16,
-          scale: 0.9,
-          duration: 20,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-        })
+  // Fondo: manchas de color que derivan lento, para que el hero nunca quede quieto.
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        const drift = { repeat: -1, yoyo: true, ease: 'sine.inOut' }
+        gsap.to('[data-blob="a"]', { xPercent: 22, yPercent: -14, scale: 1.15, duration: 16, ...drift })
+        gsap.to('[data-blob="b"]', { xPercent: -18, yPercent: 16, scale: 0.9, duration: 20, ...drift })
+        gsap.to('[data-blob="c"]', { xPercent: -26, yPercent: 20, scale: 1.2, duration: 24, ...drift })
       })
     },
     { scope },
@@ -85,20 +86,20 @@ export function Hero() {
         />
         <div
           data-blob="b"
-          className="absolute -right-[12%] bottom-[-10%] size-[48vmax] rounded-full bg-(--blob-b) opacity-30 blur-[120px] dark:opacity-15"
+          className="absolute -right-[12%] bottom-[-10%] size-[48vmax] rounded-full bg-(--blob-b) opacity-30 blur-[120px] dark:opacity-40"
+        />
+        <div
+          data-blob="c"
+          className="absolute right-[18%] top-[-12%] size-[30vmax] rounded-full bg-(--blob-c) opacity-25 blur-[100px] dark:opacity-15"
         />
       </div>
 
       <StackMarquee x={marqueeX} y={marqueeY} />
 
-      <div className="relative mx-auto w-full max-w-7xl px-5 pb-12 pt-24 md:px-10 md:pb-16">
-        <p data-reveal className="mb-5 font-mono text-sm text-ink-muted md:text-base">
-          <RoleRotator key={language} roles={t.hero.roles} />
-        </p>
-
+      <div className="container-page relative pb-12 pt-28 md:pb-16">
         <h1
           aria-label={`${profile.firstName} ${profile.lastName}`}
-          className="font-display text-[clamp(4rem,15.5vw,13.5rem)] font-bold leading-[0.84] tracking-[-0.045em]"
+          className="font-display text-[clamp(4rem,1.5rem+11.5vw,15rem)] font-bold leading-[0.84] tracking-[-0.045em]"
         >
           <span aria-hidden="true">
             <SplitWord word={profile.firstName} />
@@ -106,7 +107,16 @@ export function Hero() {
           </span>
         </h1>
 
-        <div className="mt-8 flex flex-col gap-7 border-t border-line pt-7 md:mt-10 md:flex-row md:items-end md:justify-between">
+        <div className="mt-7 md:mt-9">
+          <RoleList roles={t.hero.roles} />
+        </div>
+
+        <div
+          data-line
+          className="mt-8 h-px origin-left bg-linear-to-r from-gold via-gold/50 to-transparent md:mt-10"
+        />
+
+        <div className="flex flex-col gap-7 pt-7 md:flex-row md:items-end md:justify-between">
           <p data-reveal className="max-w-[46ch] text-lg leading-relaxed text-ink-muted md:text-xl">
             {t.hero.intro}
           </p>
@@ -120,7 +130,7 @@ export function Hero() {
             </Link>
             <Link
               to="/contact"
-              className="rounded-full border border-ink/25 px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-ink active:scale-[0.98]"
+              className="rounded-full border border-gold/60 px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-gold hover:bg-gold/10 active:scale-[0.98]"
             >
               {t.hero.secondaryCta}
             </Link>
