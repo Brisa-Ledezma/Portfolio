@@ -15,10 +15,13 @@ export function Home() {
     <>
       <Hero />
 
-      <section className="mx-auto max-w-7xl px-5 pt-24 md:px-10 md:pt-36">
+      <section className="container-page pt-24 md:pt-36">
         <Reveal className="flex items-end justify-between gap-6">
           <h2 className="font-display text-5xl font-bold tracking-tighter md:text-7xl">
             {t.home.projectsTitle}
+            <span aria-hidden="true" className="ml-3 align-top text-2xl text-gold md:text-4xl">
+              ✦
+            </span>
           </h2>
           <Link to="/projects" className={`${linkClass} hidden md:inline-flex`}>
             {t.home.projectsLink}
@@ -37,7 +40,7 @@ export function Home() {
                   <span className="font-display text-3xl font-semibold tracking-tight transition-[color,transform] duration-300 group-hover:translate-x-3 group-hover:text-accent md:text-5xl">
                     {project.name}
                   </span>
-                  <span className="font-mono text-xs text-ink-muted md:text-sm">
+                  <span className="font-mono text-xs text-detail md:text-sm">
                     {project.stack.slice(0, 3).join(' / ')}
                   </span>
                 </Link>
@@ -52,7 +55,7 @@ export function Home() {
         </Link>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-10 px-5 pt-24 md:grid-cols-12 md:px-10 md:pt-40">
+      <section className="container-page grid gap-10 pt-24 md:grid-cols-12 md:pt-40">
         <Reveal className="md:col-span-9 md:col-start-2">
           <p className="font-display text-3xl font-medium leading-[1.15] tracking-tight md:text-5xl">
             {t.home.aboutStatement}
