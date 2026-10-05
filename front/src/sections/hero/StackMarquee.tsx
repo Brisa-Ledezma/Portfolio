@@ -30,10 +30,13 @@ export function StackMarquee({ x, y }: StackMarqueeProps) {
       {columns.map((words, column) => (
         <ul
           key={column}
-          className={`flex-1 font-display text-[clamp(3.5rem,1rem+3.6vw,6rem)] font-semibold leading-none tracking-tighter will-change-transform ${
+          className={`h-max flex-1 self-start font-display text-[clamp(3.5rem,1rem+3.6vw,6rem)] font-semibold leading-none tracking-tighter will-change-transform ${
             column === 0 ? 'animate-marquee-up' : 'animate-marquee-down'
           }`}
         >
+          {/* h-max + self-start: la columna mide lo que su contenido y no lo que el
+              contenedor; si no, el -50% de la animación no coincide con media lista
+              y el ciclo salta. */}
           {/* El espacio va dentro de cada ítem (padding) y no como gap,
               para que las copias midan exactamente lo mismo. */}
           {Array.from({ length: COPIES }, () => words)

@@ -79,7 +79,7 @@ export const profile = {
     'React',
     'TypeScript',
     'Node.js',
-    'NestJS',
+    'Next.js',
     'PostgreSQL',
     'Java',
     'MySQL',
