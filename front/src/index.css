@@ -1,1 +1,123 @@
 @import 'tailwindcss';
+
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Tema claro: papel beige con bordó. */
+:root {
+  --bg: #f2ece0;
+  --surface: #e7decd;
+  --ink: #2a1a1c;
+  --ink-muted: #65544f;
+  --line: rgb(42 26 28 / 0.14);
+  --accent: #6e1f2b;
+  --on-accent: #f6f0e4;
+  --secondary: #5c6140;
+  --block: #6e1f2b;
+  --on-block: #f6f0e4;
+  --blob-a: #8a2d3b;
+  --blob-b: #7f8559;
+  color-scheme: light;
+}
+
+/* Tema oscuro: casi negro neutro, con bordó y dorado apagado. Sin oliva. */
+[data-theme='dark'] {
+  --bg: #121113;
+  --surface: #1b1a1d;
+  --ink: #ece7dd;
+  --ink-muted: #a29c94;
+  --line: rgb(236 231 221 / 0.13);
+  --accent: #c9a66b;
+  --on-accent: #151315;
+  --secondary: #8f3345;
+  --block: #5a1a26;
+  --on-block: #f2ece0;
+  --blob-a: #6e1f2b;
+  --blob-b: #7a6034;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-secondary: var(--secondary);
+  --color-block: var(--block);
+  --color-on-block: var(--on-block);
+
+  --animate-marquee-up: marquee-up 38s linear infinite;
+  --animate-marquee-down: marquee-down 46s linear infinite;
+
+  @keyframes marquee-up {
+    to {
+      transform: translateY(-50%);
+    }
+  }
+  @keyframes marquee-down {
+    from {
+      transform: translateY(-50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    transition:
+      background-color 0.5s ease,
+      color 0.5s ease;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--on-accent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* Grano de papel: fijo y sin eventos, para no afectar el scroll. */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  [data-theme='dark'] body::after {
+    mix-blend-mode: screen;
+    opacity: 0.05;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
