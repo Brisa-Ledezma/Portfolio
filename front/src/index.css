@@ -18,12 +18,16 @@
   --secondary: #5c6140;
   --block: #6e1f2b;
   --on-block: #f6f0e4;
+  --gold: #87672b;
+  --detail: #5c6140;
   --blob-a: #8a2d3b;
   --blob-b: #7f8559;
+  --blob-c: #c9a66b;
   color-scheme: light;
 }
 
-/* Tema oscuro: casi negro neutro, con bordó y dorado apagado. Sin oliva. */
+/* Tema oscuro: casi negro neutro, con bordó y dorado apagado. Sin oliva:
+   los detalles que en claro son oliva, acá son dorados. */
 [data-theme='dark'] {
   --bg: #121113;
   --surface: #1b1a1d;
@@ -35,8 +39,11 @@
   --secondary: #8f3345;
   --block: #5a1a26;
   --on-block: #f2ece0;
+  --gold: #c9a66b;
+  --detail: #c9a66b;
   --blob-a: #6e1f2b;
-  --blob-b: #7a6034;
+  --blob-b: #3d1520;
+  --blob-c: #6e1f2b;
   color-scheme: dark;
 }
 
@@ -55,9 +62,11 @@
   --color-secondary: var(--secondary);
   --color-block: var(--block);
   --color-on-block: var(--on-block);
+  --color-gold: var(--gold);
+  --color-detail: var(--detail);
 
-  --animate-marquee-up: marquee-up 38s linear infinite;
-  --animate-marquee-down: marquee-down 46s linear infinite;
+  --animate-marquee-up: marquee-up 70s linear infinite;
+  --animate-marquee-down: marquee-down 84s linear infinite;
 
   @keyframes marquee-up {
     to {
@@ -72,6 +81,15 @@
       transform: translateY(0);
     }
   }
+}
+
+/* Contenedor fluido: acompaña el ancho real de la ventana (también con zoom)
+   en lugar de quedar fijo y centrado con márgenes enormes. */
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1760px;
+  padding-inline: clamp(1.25rem, 4vw, 4.5rem);
 }
 
 @layer base {

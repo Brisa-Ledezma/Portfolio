@@ -19,6 +19,8 @@ Los colores son variables CSS definidas en [front/src/index.css](../front/src/in
 | `secondary` | Detalles secundarios | `#5c6140` oliva | `#8f3345` bordó claro |
 | `block` | Bloque destacado de contacto | `#6e1f2b` bordó | `#5a1a26` bordó |
 | `on-block` | Texto sobre el bloque | `#f6f0e4` | `#f2ece0` |
+| `gold` | Líneas, destellos ✦ y detalles de marca | `#87672b` | `#c9a66b` |
+| `detail` | Etiquetas, fechas y roles | `#5c6140` oliva | `#c9a66b` dorado |
 | `line` | Bordes y divisores | tinta al 14 % | beige al 14 % |
 
 Reglas:
@@ -26,6 +28,16 @@ Reglas:
 - Un solo color de acento por tema, usado siempre para lo mismo.
 - Todo par texto/fondo cumple contraste WCAG AA.
 - El tema inicial sigue la preferencia del sistema; la elección de la persona se guarda en el navegador.
+
+## Marca
+
+El logo es un monograma "bl" dorado sobre bordó, en [front/public/favicon.svg](../front/public/favicon.svg) (ícono de la pestaña) y como componente en [front/src/components/brand/Logo.tsx](../front/src/components/brand/Logo.tsx). Aparece en el encabezado y, junto al nombre en grande, al pie de todas las páginas. El destello ✦ dorado es el separador de la marca.
+
+## Zoom y tamaños de pantalla
+
+- Los contenidos usan el contenedor fluido `container-page` (hasta 1760 px de ancho, márgenes proporcionales), para que la página acompañe el ancho de la ventana al acercar o alejar.
+- Los títulos grandes combinan `rem` y `vw` en `clamp()`, así responden tanto al tamaño de la ventana como al zoom del navegador.
+- El menú completo aparece desde 1024 px; por debajo (o con mucho zoom) se usa el menú desplegable.
 
 ## Tipografías
 

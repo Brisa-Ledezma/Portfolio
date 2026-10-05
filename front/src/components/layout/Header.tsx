@@ -2,6 +2,7 @@ import { ListIcon, MoonIcon, SunIcon, XIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router'
+import { Logo } from '@/components/brand/Logo'
 import type { Language } from '@/content'
 import { useLanguage } from '@/providers/language'
 import { useTheme } from '@/providers/theme'
@@ -21,19 +22,26 @@ export function Header() {
   ]
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 bg-bg/75 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-10">
-        <Link to="/" className="font-mono text-sm tracking-tight text-ink" onClick={() => setMenuOpen(false)}>
-          brisa.ledezma
+    <header className="fixed inset-x-0 top-0 z-40">
+      {/* Fondo que se desvanece hacia abajo: separa el menú del contenido sin cortar la página. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-linear-to-b from-bg/80 via-bg/35 to-transparent backdrop-blur-[3px] [mask-image:linear-gradient(to_bottom,black_35%,transparent)]"
+      />
+
+      <div className="container-page relative flex h-18 items-center justify-between">
+        <Link to="/" className="flex items-center gap-2.5 text-ink" onClick={() => setMenuOpen(false)}>
+          <Logo className="size-8" />
+          <span className="font-mono text-sm tracking-tight">brisa.ledezma</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 text-sm md:flex">
+        <nav className="hidden items-center gap-9 text-sm lg:flex">
           {links.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               end={link.to === '/'}
-              className="text-ink-muted transition-colors hover:text-ink aria-[current=page]:text-accent"
+              className="relative py-1 text-ink-muted transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-300 hover:text-ink hover:after:scale-x-100 aria-[current=page]:text-ink aria-[current=page]:after:scale-x-100"
             >
               {link.label}
             </NavLink>
@@ -63,7 +71,7 @@ export function Header() {
             type="button"
             onClick={toggleTheme}
             aria-label={theme === 'dark' ? t.header.themeToLight : t.header.themeToDark}
-            className="grid size-9 place-items-center rounded-full border border-line text-ink transition-transform active:scale-95"
+            className="grid size-9 place-items-center rounded-full border border-line text-gold transition-transform active:scale-95"
           >
             {theme === 'dark' ? <SunIcon size={16} /> : <MoonIcon size={16} />}
           </button>
@@ -73,7 +81,7 @@ export function Header() {
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={menuOpen ? t.nav.closeMenu : t.nav.openMenu}
             aria-expanded={menuOpen}
-            className="grid size-9 place-items-center rounded-full border border-line text-ink transition-transform active:scale-95 md:hidden"
+            className="grid size-9 place-items-center rounded-full border border-line text-ink transition-transform active:scale-95 lg:hidden"
           >
             {menuOpen ? <XIcon size={16} /> : <ListIcon size={16} />}
           </button>
@@ -87,7 +95,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25 }}
-            className="flex h-[calc(100dvh-4rem)] flex-col justify-center gap-2 bg-bg px-5 md:hidden"
+            className="container-page relative flex h-[calc(100dvh-4.5rem)] flex-col justify-center gap-3 bg-bg lg:hidden"
           >
             {links.map((link) => (
               <NavLink
