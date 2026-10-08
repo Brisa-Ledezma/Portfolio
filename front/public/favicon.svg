@@ -1,14 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <linearGradient id="wine" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="wine" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#83283a"/>
       <stop offset="1" stop-color="#4c1220"/>
     </linearGradient>
+    <linearGradient id="gold" x1="0" y1="8" x2="0" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ead1a0"/>
+      <stop offset="1" stop-color="#b8924f"/>
+    </linearGradient>
   </defs>
-  <rect width="48" height="48" rx="13" fill="url(#wine)"/>
-  <g fill="none" stroke="#f3ead9" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M9 12v24M9 12h7a5.5 5.5 0 0 1 0 11H9M9 23h8a6.5 6.5 0 0 1 0 13H9M30 12v24"/>
-  </g>
-  <path d="M30 36h9" stroke="#d9b97a" stroke-width="4" stroke-linecap="round"/>
-  <path d="M39 7.5c.55 4.3 2.2 5.95 6.5 6.5-4.3.55-5.95 2.2-6.5 6.5-.55-4.3-2.2-5.95-6.5-6.5 4.3-.55 5.95-2.2 6.5-6.5Z" fill="#d9b97a"/>
+  <rect width="64" height="64" rx="16" fill="url(#wine)"/>
+  <path d="M17 8v46h33" fill="none" stroke="url(#gold)" stroke-width="2.4" stroke-linecap="square"/>
+  <path d="M24 14v36M24 14h12l6 6v4l-6 6H24M24 30h14l7 7v6l-7 7H24" fill="none" stroke="#f3ead9" stroke-width="5" stroke-linejoin="round"/>
 </svg>
