@@ -19,8 +19,8 @@ Portfolio/
 |---|---|
 | Front | Vite, React, TypeScript, Tailwind CSS, React Router, GSAP, Motion, Lenis, TanStack Query |
 | Back | Node.js, NestJS, TypeScript, Prisma, PostgreSQL, WebSocket |
-| Infraestructura | Docker, Docker Compose |
-| Hosting | A definir (se evalúan Vercel, Cloudflare Pages, Render y Neon) |
+| Infraestructura | Docker, Docker Compose, GitHub Actions |
+| Hosting | GitHub Pages (front), Render (API), Neon (base de datos) |
 
 ## Requisitos
 
@@ -61,6 +61,7 @@ docker build --target prod -t portfolio-back ./back
 | [docs/BRANCHING.md](docs/BRANCHING.md) | Flujo de ramas y convención de commits |
 | [docs/SECURITY.md](docs/SECURITY.md) | Controles de seguridad según OWASP Top 10 |
 | [docs/DESIGN.md](docs/DESIGN.md) | Colores, tipografías, movimiento y páginas |
+| [docs/DEPLOY.md](docs/DEPLOY.md) | Despliegue automático y configuración inicial |
 
 ## Autora
 
