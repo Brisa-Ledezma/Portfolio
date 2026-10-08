@@ -16,7 +16,7 @@ El avance se ve en la pestaña **Actions** del repositorio, en el workflow **Dep
 
 | Parte | Dónde vive | Dirección |
 |---|---|---|
-| Front | GitHub Pages | `https://brisa-ledezma.github.io/<repo>/` |
+| Front | GitHub Pages | [brisa-ledezma.github.io/Brisa-Ledezma](https://brisa-ledezma.github.io/Brisa-Ledezma/) |
 | API | Render (plan gratuito, imagen Docker) | la que asigna Render, por ejemplo `https://portfolio-api.onrender.com` |
 | Imagen de la API | GitHub Container Registry | `ghcr.io/brisa-ledezma/portfolio-api` |
 
