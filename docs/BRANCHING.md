@@ -5,7 +5,8 @@
 | Rama | Propósito | Se crea desde | Se integra en |
 |---|---|---|---|
 | `main` | Lo que está en producción. Cada commit es desplegable. | — | — |
-| `develop` | Integración del trabajo terminado. | `main` | `main` (al publicar una versión) |
+| `develop` | Integración del trabajo terminado. | `main` | `test` y `main` |
+| `test` | Entorno de pruebas publicado. Cada push se despliega solo (ver [DEPLOY.md](DEPLOY.md)). | `develop` | `main` (al publicar una versión) |
 | `feature/<nombre>` | Una funcionalidad nueva. | `develop` | `develop` |
 | `fix/<nombre>` | Corrección de un error. | `develop` | `develop` |
 | `docs/<nombre>` | Solo documentación. | `develop` | `develop` |
@@ -32,6 +33,14 @@ git switch develop
 git merge --no-ff feature/contact-form
 git push origin develop
 git branch -d feature/contact-form
+```
+
+## Probar en el entorno publicado
+
+```bash
+git switch test
+git merge --no-ff develop
+git push origin test      # GitHub Actions verifica y despliega
 ```
 
 ## Publicar una versión
@@ -62,9 +71,10 @@ Se usa [Conventional Commits](https://www.conventionalcommits.org/es/):
 | `refactor` | Cambio interno que no altera el comportamiento |
 | `test` | Tests |
 | `chore` | Configuración, dependencias, tareas de mantenimiento |
+| `ci` | Workflows de integración y despliegue |
 | `perf` | Mejora de rendimiento |
 
-Alcances: `front`, `back`, `docker`, `repo`.
+Alcances: `front`, `back`, `docker`, `repo`, `deploy`.
 
 Ejemplos:
 

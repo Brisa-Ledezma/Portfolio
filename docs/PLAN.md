@@ -15,7 +15,7 @@ Un portfolio que se sienta actual y con identidad propia: tipografía protagonis
 | 5 | API de contacto | `feature/contact-api` | El formulario envía el mensaje por WebSocket; la API lo valida, lo guarda con Prisma y avisa por mail | Pendiente |
 | 6 | Seguridad | `feature/security-hardening` | Controles de [SECURITY.md](SECURITY.md) implementados | Pendiente |
 | 7 | Secciones del front | una rama `feature/` por sección | Sitio completo en español e inglés, responsive y accesible | Pendiente |
-| 8 | Despliegue | `chore/deploy` | Sitio público en la nube, publicado desde `main` | Pendiente |
+| 8 | Despliegue continuo | `chore/deploy-pipeline` | Push a `test` verifica y despliega front y API con GitHub Actions | En curso |
 
 ## Secciones del sitio
 
@@ -36,12 +36,13 @@ Un portfolio que se sienta actual y con identidad propia: tipografía protagonis
 - **Seguridad:** todos los controles de [SECURITY.md](SECURITY.md) en estado "Hecho" antes del despliegue.
 - **Historial:** ramas y commits según [BRANCHING.md](BRANCHING.md).
 
-## Hosting (a definir)
+## Hosting
 
 | Parte | Servicio | Límite del plan gratuito |
 |---|---|---|
-| Front | Cloudflare Pages | Sitio estático, sin suspensión |
-| Back | Render (contenedor Docker) | 512 MB de RAM; se suspende tras 15 minutos sin uso |
+| Front | GitHub Pages | Sitio estático, sin suspensión |
+| API | Render (imagen Docker) | 512 MB de RAM; se suspende tras 15 minutos sin uso, mitigado con un keep-alive |
+| Imagen de la API | GitHub Container Registry | Gratis para paquetes públicos |
 | Base de datos | Neon (PostgreSQL) | 0,5 GB de almacenamiento |
 
-Como el back puede tardar en despertar, el front se muestra completo sin esperar a la API.
+Detalle del despliegue en [DEPLOY.md](DEPLOY.md).
