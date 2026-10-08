@@ -230,7 +230,7 @@ export const content: Record<Language, Content> = {
       elsewhereLabel: 'También estoy en',
     },
     footer: {
-      note: 'Diseñado y desarrollado por Brisa Ledezma.',
+      note: 'Analista de sistemas y desarrolladora full stack',
     },
   },
   en: {
@@ -363,7 +363,7 @@ export const content: Record<Language, Content> = {
       elsewhereLabel: 'You can also find me on',
     },
     footer: {
-      note: 'Designed and built by Brisa Ledezma.',
+      note: 'Systems analyst and full stack developer',
     },
   },
 }
