@@ -1,0 +1,21 @@
+# La API gratuita de Render se duerme tras 15 minutos sin tráfico y tarda
+# cerca de un minuto en despertar. Este workflow la consulta cada 10 minutos
+# para que no llegue a dormirse. Con un solo servicio, las 750 horas mensuales
+# del plan gratuito alcanzan para tenerla encendida todo el mes.
+# Nota: GitHub puede demorar unos minutos las ejecuciones programadas.
+
+name: Keep API awake
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    if: vars.API_URL != ''
+    steps:
+      - run: curl --silent --max-time 90 --output /dev/null --write-out "%{http_code}\n" "${{ vars.API_URL }}/health"
