@@ -31,7 +31,7 @@ Reglas:
 
 ## Marca
 
-El logo es un monograma "bl" dorado sobre bordó, en [front/public/favicon.svg](../front/public/favicon.svg) (ícono de la pestaña) y como componente en [front/src/components/brand/Logo.tsx](../front/src/components/brand/Logo.tsx). Aparece en el encabezado y, junto al nombre en grande, al pie de todas las páginas. El destello ✦ dorado es el separador de la marca.
+El logo es el monograma "BL": la B en beige, la L con el pie dorado y el destello ✦ dorado de la marca, sobre un cuadrado bordó con degradé. Está en [front/public/favicon.svg](../front/public/favicon.svg) (ícono de la pestaña) y como componente en [front/src/components/brand/Logo.tsx](../front/src/components/brand/Logo.tsx). Aparece en el encabezado y en el pie, que es compacto: logo, nombre y enlaces. El destello ✦ dorado es el separador de la marca.
 
 ## Zoom y tamaños de pantalla
 
