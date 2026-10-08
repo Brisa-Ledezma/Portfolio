@@ -32,8 +32,8 @@ No hace falta instalar Node ni PostgreSQL: corren dentro de los contenedores.
 ## Cómo levantarlo
 
 ```bash
-git clone https://github.com/Brisa-Ledezma/Portfolio.git
-cd Portfolio
+git clone https://github.com/Brisa-Ledezma/Brisa-Ledezma.git
+cd Brisa-Ledezma
 cp .env.example .env        # y completar la clave de la base de datos
 docker compose up --build
 ```
