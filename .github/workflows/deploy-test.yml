@@ -1,0 +1,165 @@
+# Despliegue automático del entorno de pruebas.
+# Cada push a la rama `test` verifica front y back, construye la imagen Docker
+# de la API, la publica en GitHub Container Registry y despliega:
+#   - el front en GitHub Pages
+#   - la API en Render, a partir de esa imagen
+# Configuración necesaria (una sola vez): ver docs/DEPLOY.md
+
+name: Deploy test
+
+on:
+  push:
+    branches: [test]
+  workflow_dispatch:
+
+# Si llegan dos pushes seguidos, el segundo espera al primero en lugar de pisarlo.
+concurrency:
+  group: deploy-test
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  front:
+    name: Front · verificar y compilar
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: front
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: front/package-lock.json
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+
+      - name: Calcular la ruta base de GitHub Pages
+        # Un repo llamado <usuario>.github.io se publica en la raíz; cualquier otro, en /<repo>/.
+        run: |
+          repo="${{ github.event.repository.name }}"
+          if [[ "${repo,,}" == *.github.io ]]; then base="/"; else base="/${repo}/"; fi
+          echo "VITE_BASE=$base" >> "$GITHUB_ENV"
+
+      - name: Compilar
+        run: npm run build
+        env:
+          VITE_API_URL: ${{ vars.API_URL }}
+
+      - name: Habilitar rutas del sitio en GitHub Pages
+        # Pages no conoce las rutas de React Router: con 404.html igual a index.html,
+        # entrar directo a /projects carga la app y el enrutador resuelve la página.
+        run: cp dist/index.html dist/404.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: front/dist
+
+  back:
+    name: Back · verificar
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: back
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: back/package-lock.json
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run test:e2e
+      - run: npm run build
+
+  back-image:
+    name: Back · imagen Docker
+    needs: back
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image: ${{ steps.meta.outputs.image }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Nombre de la imagen
+        id: meta
+        # El registro exige minúsculas.
+        run: |
+          owner="${{ github.repository_owner }}"
+          echo "image=ghcr.io/${owner,,}/portfolio-api" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: back
+          target: prod
+          push: true
+          tags: |
+            ${{ steps.meta.outputs.image }}:test
+            ${{ steps.meta.outputs.image }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy-front:
+    name: Front · desplegar en GitHub Pages
+    needs: front
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  deploy-back:
+    name: Back · desplegar en Render
+    needs: back-image
+    runs-on: ubuntu-latest
+    environment:
+      name: test
+      url: ${{ vars.API_URL }}
+    steps:
+      - name: Pedir a Render que use la imagen nueva
+        env:
+          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          IMAGE: ${{ needs.back-image.outputs.image }}:${{ github.sha }}
+        run: |
+          if [ -z "$DEPLOY_HOOK" ]; then
+            echo "::warning::Falta el secreto RENDER_DEPLOY_HOOK_URL: la imagen se publicó pero la API no se desplegó. Ver docs/DEPLOY.md"
+            exit 0
+          fi
+          curl --fail --silent --show-error -X POST "${DEPLOY_HOOK}&imgURL=$(printf %s "$IMAGE" | jq -sRr @uri)"
+          echo "Desplegando $IMAGE"
+
+      - name: Esperar a que la API responda
+        if: vars.API_URL != ''
+        run: |
+          for i in $(seq 1 30); do
+            if curl --fail --silent "${{ vars.API_URL }}/health"; then echo; echo "API en línea"; exit 0; fi
+            sleep 10
+          done
+          echo "::error::La API no respondió en 5 minutos"
+          exit 1
