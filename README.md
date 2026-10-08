@@ -61,6 +61,7 @@ docker build --target prod -t portfolio-back ./back
 | [docs/BRANCHING.md](docs/BRANCHING.md) | Flujo de ramas y convención de commits |
 | [docs/SECURITY.md](docs/SECURITY.md) | Controles de seguridad según OWASP Top 10 |
 | [docs/DESIGN.md](docs/DESIGN.md) | Colores, tipografías, movimiento y páginas |
+| [docs/BRAND.md](docs/BRAND.md) | Guía de marca: logo, colores y tipografías |
 | [docs/DEPLOY.md](docs/DEPLOY.md) | Despliegue automático y configuración inicial |
 
 ## Autora
