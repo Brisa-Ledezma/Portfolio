@@ -92,7 +92,7 @@ export const profile = {
 } as const
 
 const repos = {
-  portfolio: 'https://github.com/Brisa-Ledezma/Brisa-Ledezma',
+  portfolio: 'https://github.com/Brisa-Ledezma/Portfolio',
   gym: 'https://github.com/Brisa-Ledezma/Proyecto_gimnasio-',
 }
 
