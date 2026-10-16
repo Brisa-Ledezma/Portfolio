@@ -1,0 +1,22 @@
+// Modelo de datos de la API. Las migraciones viven en prisma/migrations.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Mensaje enviado desde el formulario de contacto del portfolio.
+model ContactMessage {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String   @db.VarChar(80)
+  email     String   @db.VarChar(254)
+  message   String   @db.VarChar(2000)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([createdAt])
+  @@map("contact_messages")
+}
