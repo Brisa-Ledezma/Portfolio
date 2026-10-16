@@ -40,8 +40,13 @@ export function Home() {
                   <span className="font-display text-3xl font-semibold tracking-tight transition-[color,transform] duration-300 group-hover:translate-x-3 group-hover:text-accent md:text-5xl">
                     {project.name}
                   </span>
-                  <span className="font-mono text-xs text-detail md:text-sm">
-                    {project.stack.slice(0, 3).join(' / ')}
+                  <span className="flex items-center gap-3 font-mono text-xs text-detail md:text-sm">
+                    {project.featured && (
+                      <span className="rounded-full bg-block px-2.5 py-0.5 text-on-block">
+                        ✦ {t.projects.featuredLabel}
+                      </span>
+                    )}
+                    {project.kind}
                   </span>
                 </Link>
               </Reveal>

@@ -81,8 +81,11 @@ export function About() {
             <Reveal key={group.label}>
               <div className="grid gap-3 border-b border-line py-6 md:grid-cols-12 md:items-baseline">
                 <dt className="font-mono text-xs text-detail md:col-span-3 md:text-sm">{group.label}</dt>
-                <dd className="font-display text-2xl font-medium leading-snug tracking-tight md:col-span-9 md:text-3xl">
-                  {group.items.join(', ')}
+                <dd className="md:col-span-9">
+                  <p className="font-display text-2xl font-medium leading-snug tracking-tight md:text-3xl">
+                    {group.items.join(', ')}
+                  </p>
+                  {group.evidence && <p className="mt-2 text-sm text-ink-muted">{group.evidence}</p>}
                 </dd>
               </div>
             </Reveal>

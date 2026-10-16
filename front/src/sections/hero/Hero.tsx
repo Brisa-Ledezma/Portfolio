@@ -128,12 +128,14 @@ export function Hero() {
             >
               {t.hero.primaryCta}
             </Link>
-            <Link
-              to="/contact"
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noreferrer"
               className="rounded-full border border-gold/60 px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-gold hover:bg-gold/10 active:scale-[0.98]"
             >
               {t.hero.secondaryCta}
-            </Link>
+            </a>
           </div>
         </div>
       </div>
