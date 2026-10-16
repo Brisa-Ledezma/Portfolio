@@ -18,7 +18,7 @@ Portfolio/
 | Capa | Tecnologías |
 |---|---|
 | Front | Vite, React, TypeScript, Tailwind CSS, React Router, GSAP, Motion, Lenis, TanStack Query |
-| Back | Node.js, NestJS, TypeScript, Prisma, PostgreSQL, WebSocket |
+| Back | Node.js, NestJS, TypeScript, Prisma, PostgreSQL, Socket.IO (WebSocket), Nodemailer, zod |
 | Infraestructura | Docker, Docker Compose, GitHub Actions |
 | Hosting | GitHub Pages (front), Render (API), Neon (base de datos) |
 

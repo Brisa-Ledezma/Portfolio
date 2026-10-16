@@ -4,16 +4,16 @@ El proyecto toma como referencia el [OWASP Top 10:2025](https://owasp.org/Top10/
 
 | Riesgo | Control en este proyecto | Estado |
 |---|---|---|
-| **A01 Broken Access Control** | La API no expone lectura de datos: el único endpoint de escritura es el de contacto. No hay panel de administración. CORS limitado al dominio del front. | Pendiente |
-| **A02 Security Misconfiguration** | Headers seguros con Helmet y Content Security Policy. Swagger deshabilitado en producción. Contenedores sin usuario root. Configuración validada al arrancar. | Pendiente |
-| **A03 Software Supply Chain Failures** | `package-lock.json` versionado e instalación con `npm ci`. `npm audit` antes de cada versión. Acciones de GitHub fijadas por versión mayor. Imágenes base de Docker con versión fija. | Pendiente |
-| **A04 Cryptographic Failures** | HTTPS obligatorio en producción. Conexión a la base de datos con TLS. Secretos solo por variables de entorno, nunca en el repositorio. | Pendiente |
-| **A05 Injection** | Consultas siempre parametrizadas a través del ORM. Validación y lista blanca de campos en cada DTO. React escapa el contenido por defecto; no se usa `dangerouslySetInnerHTML`. | Pendiente |
-| **A06 Insecure Design** | Rate limiting global y más estricto en el formulario de contacto. Límites de tamaño en cada campo y en el cuerpo de la petición. Honeypot anti-spam. | Pendiente |
-| **A07 Authentication Failures** | El sitio no tiene inicio de sesión ni cuentas de usuario, por lo que no hay credenciales que proteger. Si se agrega autenticación, este control se redefine antes de implementarla. | Pendiente |
-| **A08 Software or Data Integrity Failures** | Despliegue solo por GitHub Actions y solo si pasan lint, tipos y tests. Secretos de despliegue guardados como GitHub Secrets. Sin scripts de terceros cargados desde CDN. | Pendiente |
-| **A09 Security Logging and Alerting Failures** | Logs estructurados con identificador por petición. Se registran rechazos de validación, de rate limit y de autenticación. Nunca se registran datos personales ni secretos. | Pendiente |
-| **A10 Mishandling of Exceptional Conditions** | Filtro global de excepciones: el cliente recibe un mensaje genérico, el detalle queda en el log. Falla cerrada ante errores. Timeouts en llamadas externas. | Pendiente |
+| **A01 Broken Access Control** | La API no expone lectura de datos: el único punto de escritura es el envío de contacto por WebSocket. No hay panel de administración. CORS y WebSocket limitados al dominio del front (el origen se valida en cada conexión). | Hecho |
+| **A02 Security Misconfiguration** | Headers seguros con Helmet. Contenedores sin usuario root. Configuración validada al arrancar con zod: si algo falta o es inválido, la API no inicia. | Hecho |
+| **A03 Software Supply Chain Failures** | `package-lock.json` versionado e instalación con `npm ci`. `npm audit` antes de cada versión. Acciones de GitHub fijadas por versión mayor. Imágenes base de Docker con versión fija. | Hecho |
+| **A04 Cryptographic Failures** | HTTPS en GitHub Pages y Render. Conexión a la base de datos con TLS (Neon lo exige). Secretos solo por variables de entorno, nunca en el repositorio; la contraseña de Gmail es una contraseña de aplicación revocable. | Hecho |
+| **A05 Injection** | Consultas parametrizadas a través de Prisma. Validación con lista blanca de campos y largos máximos en cada mensaje. El mail de aviso es texto plano y el asunto elimina saltos de línea (sin inyección de encabezados). React escapa el contenido por defecto; no se usa `dangerouslySetInnerHTML`. | Hecho |
+| **A06 Insecure Design** | Límite de 3 mensajes cada 10 minutos por IP (tomando la IP que agrega el proxy, no la que puede inventar el cliente). Tamaño máximo de 10 KB por mensaje de WebSocket. Campo trampa anti-spam. | Hecho |
+| **A07 Authentication Failures** | El sitio no tiene inicio de sesión ni cuentas de usuario, por lo que no hay credenciales que proteger. Si se agrega autenticación, este control se redefine antes de implementarla. | No aplica |
+| **A08 Software or Data Integrity Failures** | Despliegue solo por GitHub Actions y solo si pasan lint, tipos y tests. Secretos de despliegue guardados como GitHub Secrets. Sin scripts de terceros cargados desde CDN. | Hecho |
+| **A09 Security Logging and Alerting Failures** | Se registran los rechazos por validación, por límite de envíos y por campo trampa, y los fallos al guardar o enviar. Los logs nunca incluyen datos de quien escribe ni secretos. | Hecho |
+| **A10 Mishandling of Exceptional Conditions** | Falla cerrada: una configuración inválida impide arrancar. Si falla un destino del mensaje (base o mail), el otro igual lo entrega; si fallan los dos, la persona recibe un error genérico y el detalle queda en el log. Timeouts en la conexión SMTP y en el envío desde el front. | Hecho |
 
 ## Manejo de secretos
 
