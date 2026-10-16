@@ -80,6 +80,27 @@ export interface Content {
     body: string
     emailLabel: string
     elsewhereLabel: string
+    form: {
+      title: string
+      name: string
+      email: string
+      message: string
+      messageHelp: string
+      submit: string
+      sending: string
+      waking: string
+      success: string
+      sendAnother: string
+      errors: {
+        name: string
+        email: string
+        message: string
+        invalid: string
+        rate_limited: string
+        unavailable: string
+        network: string
+      }
+    }
   }
   footer: {
     note: string
@@ -324,6 +345,27 @@ export const content: Record<Language, Content> = {
       body: 'Estoy abierta a puestos de analista de sistemas, desarrollo full stack y automatización. Respondo por mail.',
       emailLabel: 'Escribime a',
       elsewhereLabel: 'También estoy en',
+      form: {
+        title: 'Escribime desde acá',
+        name: 'Nombre',
+        email: 'Email',
+        message: 'Mensaje',
+        messageHelp: 'Entre 10 y 2000 caracteres.',
+        submit: 'Enviar mensaje',
+        sending: 'Enviando...',
+        waking: 'El servidor se está despertando, puede tardar unos segundos más.',
+        success: '¡Gracias! Tu mensaje llegó. Te respondo por mail.',
+        sendAnother: 'Enviar otro mensaje',
+        errors: {
+          name: 'Escribí tu nombre (2 a 80 caracteres).',
+          email: 'Revisá el email: no parece válido.',
+          message: 'El mensaje tiene que tener entre 10 y 2000 caracteres.',
+          invalid: 'Hay datos que no son válidos. Revisalos y volvé a intentar.',
+          rate_limited: 'Enviaste varios mensajes seguidos. Esperá unos minutos y volvé a intentar.',
+          unavailable: 'No pude recibir el mensaje en este momento. Escribime directo al mail.',
+          network: 'No hubo conexión con el servidor. Probá de nuevo o escribime directo al mail.',
+        },
+      },
     },
     footer: {
       note: 'Desarrolladora full stack junior · Analista de sistemas',
@@ -535,6 +577,27 @@ export const content: Record<Language, Content> = {
       body: 'I am open to systems analyst, full stack development and automation roles. I reply by email.',
       emailLabel: 'Write to me at',
       elsewhereLabel: 'You can also find me on',
+      form: {
+        title: 'Write to me here',
+        name: 'Name',
+        email: 'Email',
+        message: 'Message',
+        messageHelp: 'Between 10 and 2000 characters.',
+        submit: 'Send message',
+        sending: 'Sending...',
+        waking: 'The server is waking up, this may take a few more seconds.',
+        success: 'Thank you! Your message arrived. I will reply by email.',
+        sendAnother: 'Send another message',
+        errors: {
+          name: 'Write your name (2 to 80 characters).',
+          email: 'Check the email: it does not look valid.',
+          message: 'The message must be between 10 and 2000 characters.',
+          invalid: 'Some fields are not valid. Check them and try again.',
+          rate_limited: 'You sent several messages in a row. Wait a few minutes and try again.',
+          unavailable: 'I could not receive the message right now. Please email me directly.',
+          network: 'Could not reach the server. Try again or email me directly.',
+        },
+      },
     },
     footer: {
       note: 'Junior full stack developer · Systems analyst',
