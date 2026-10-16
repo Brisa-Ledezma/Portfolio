@@ -1,9 +1,11 @@
 import { useId } from 'react'
 
-// Monograma "BL". La L dorada, fina y alta, enmarca a la B; la B tiene las
-// esquinas en chaflán (cortes a 45°), un guiño a las pistas de un circuito
-// sin perder la forma clásica de la letra. Es la misma figura que public/favicon.svg.
-// Guía completa de uso en docs/BRAND.md.
+// Monograma "LB": una L de fuste grueso y una B que nace sobre su pie, con la panza
+// inferior en diagonal colgando por debajo de la línea de la L. Letras doradas sobre
+// bordó. Es la misma figura que public/favicon.svg. Guía de uso en docs/BRAND.md.
+const LETTERS =
+  'M119 92H162V432H119ZM98 84H184V91Q166 92 162 106V110H119V106Q115 92 98 91ZM100 432H244V440H100ZM236 414Q240 428 244 432H236ZM206 300H214V432H206ZM206 296C290 280 404 278 438 328C454 354 444 392 402 405C372 413 334 414 300 416L300 409C340 406 380 398 392 377C404 356 398 322 374 309C338 291 270 295 214 305ZM256 412L307 412L208 612L185 612ZM185 604H392V612H185ZM296 413C424 414 482 468 474 532C468 588 424 612 382 612L382 604C406 603 426 580 428 532C432 478 398 428 296 422Z'
+
 export function Logo({ className }: { className?: string }) {
   // Ids únicos por instancia: el logo aparece más de una vez en la página.
   const id = useId()
@@ -11,24 +13,25 @@ export function Logo({ className }: { className?: string }) {
   const gold = `${id}-gold`
 
   return (
-    <svg viewBox="0 0 64 64" aria-hidden="true" className={className}>
+    <svg viewBox="0 0 700 700" aria-hidden="true" className={className}>
       <defs>
-        <linearGradient id={wine} x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#83283a" />
+        <linearGradient id={wine} x1="0" y1="0" x2="700" y2="700" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#7a2333" />
           <stop offset="1" stopColor="#4c1220" />
         </linearGradient>
-        <linearGradient id={gold} x1="0" y1="8" x2="0" y2="56" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#ead1a0" />
-          <stop offset="1" stopColor="#b8924f" />
+        <linearGradient id={gold} x1="100" y1="84" x2="480" y2="612" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#f0daac" />
+          <stop offset=".5" stopColor="#d4b06e" />
+          <stop offset="1" stopColor="#a9844a" />
         </linearGradient>
       </defs>
-      <rect width="64" height="64" rx="16" fill={`url(#${wine})`} />
-      <path d="M17 8v46h33" fill="none" stroke={`url(#${gold})`} strokeWidth="2.4" strokeLinecap="square" />
+      <rect width="700" height="700" rx="150" fill={`url(#${wine})`} />
       <path
-        d="M24 14v36M24 14h12l6 6v4l-6 6H24M24 30h14l7 7v6l-7 7H24"
-        fill="none"
-        stroke="#f3ead9"
-        strokeWidth="5"
+        transform="translate(42 44) scale(.88) translate(59 0)"
+        d={LETTERS}
+        fill={`url(#${gold})`}
+        stroke={`url(#${gold})`}
+        strokeWidth="6"
         strokeLinejoin="round"
       />
     </svg>
