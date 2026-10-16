@@ -3,13 +3,23 @@
 
 export type Language = 'es' | 'en'
 
+// Cada tecnología va con el para qué: la lista sola es una afirmación, el uso es la evidencia.
+export interface Tech {
+  name: string
+  use: string
+}
+
+// Cada proyecto responde, en orden: problema, solución, mi aporte y tecnologías.
 export interface Project {
   name: string
   kind: string
-  summary: string
-  role: string
-  stack: string[]
+  featured?: boolean
+  problem: string
+  solution: string
+  contribution: string[]
+  stack: Tech[]
   repo?: string
+  demo?: string
 }
 
 export interface Content {
@@ -27,6 +37,7 @@ export interface Content {
     languageLabel: string
   }
   hero: {
+    // Rol concreto primero y tecnologías clave al final: se entiende el perfil en segundos.
     roles: string[]
     intro: string
     primaryCta: string
@@ -44,8 +55,14 @@ export interface Content {
   projects: {
     title: string
     intro: string
-    roleLabel: string
+    featuredLabel: string
+    problemLabel: string
+    solutionLabel: string
+    contributionLabel: string
+    stackLabel: string
     repoLabel: string
+    demoLabel: string
+    repoPending: string
     items: Project[]
   }
   about: {
@@ -56,7 +73,7 @@ export interface Content {
     educationTitle: string
     education: { title: string; place: string; period: string }[]
     stackTitle: string
-    stackGroups: { label: string; items: string[] }[]
+    stackGroups: { label: string; items: string[]; evidence?: string }[]
   }
   contact: {
     title: string
@@ -80,7 +97,7 @@ export const profile = {
     'TypeScript',
     'Node.js',
     'Next.js',
-    'PostgreSQL',
+    'Express',
     'Java',
     'MySQL',
     'MongoDB',
@@ -94,6 +111,7 @@ export const profile = {
 const repos = {
   portfolio: 'https://github.com/Brisa-Ledezma/Portfolio',
   gym: 'https://github.com/Brisa-Ledezma/Proyecto_gimnasio-',
+  josby: 'https://github.com/FacundoZu/josby-frontend',
 }
 
 export const content: Record<Language, Content> = {
@@ -112,11 +130,11 @@ export const content: Record<Language, Content> = {
       languageLabel: 'Idioma',
     },
     hero: {
-      roles: ['Analista de sistemas', 'Desarrolladora full stack', 'Desarrollo asistido por IA'],
+      roles: ['Desarrolladora Full Stack Junior', 'Analista de Sistemas', 'Java · React · Node.js · MySQL'],
       intro:
-        'Construyo aplicaciones web y automatizaciones de punta a punta, con IA como herramienta de trabajo diaria.',
+        'Desarrollo aplicaciones de punta a punta: base de datos, API e interfaz, con IA como herramienta de trabajo.',
       primaryCta: 'Ver proyectos',
-      secondaryCta: 'Contacto',
+      secondaryCta: 'Ver GitHub',
     },
     home: {
       projectsTitle: 'Proyectos',
@@ -131,40 +149,102 @@ export const content: Record<Language, Content> = {
     projects: {
       title: 'Proyectos',
       intro:
-        'Trabajos de formación y personales. En cada uno cuento qué resuelve y qué parte hice yo.',
-      roleLabel: 'Mi parte',
-      repoLabel: 'Ver repositorio',
+        'Para cada uno: qué problema resuelve, cómo lo resolví, qué parte hice yo y para qué usé cada tecnología.',
+      featuredLabel: 'Destacado',
+      problemLabel: 'Problema',
+      solutionLabel: 'Solución',
+      contributionLabel: 'Mi aporte',
+      stackLabel: 'Tecnologías y para qué',
+      repoLabel: 'GitHub',
+      demoLabel: 'Demo',
+      repoPending: 'Repositorio en preparación',
       items: [
         {
-          name: 'JosBy',
-          kind: 'Plataforma web, trabajo en equipo',
-          summary: 'Plataforma que conecta freelancers con empresas que buscan contratar servicios.',
-          role: 'Desarrollé los perfiles de usuario, con edición de datos personales y carga de imágenes, y colaboré en las interfaces de interacción entre freelancers y empresas.',
-          stack: ['MongoDB', 'Express', 'React', 'Node.js'],
-        },
-        {
-          name: 'Sistema de Facturación',
-          kind: 'Aplicación de escritorio',
-          summary: 'Sistema para emitir y consultar facturas sobre una base de datos relacional.',
-          role: 'Modelé la base de datos, implementé altas, bajas y modificaciones, y resolví la integración entre Java y MySQL.',
-          stack: ['Java', 'MySQL', 'SQL'],
+          name: 'Este portfolio',
+          kind: 'Aplicación full stack · proyecto personal',
+          featured: true,
+          problem:
+            'Necesitaba un sitio propio, publicado y fácil de mantener, que además sirviera para mostrar cómo programo.',
+          solution:
+            'Un front en React separado de una API en NestJS, todo en contenedores Docker y con despliegue automático: cada cambio se verifica y se publica solo.',
+          contribution: [
+            'Definí la arquitectura: front estático en GitHub Pages y API en un contenedor Docker en Render.',
+            'Armé el pipeline de GitHub Actions: lint, tipos, tests, imagen Docker y despliegue en cada push.',
+            'Escribí tests unitarios y end-to-end de la API.',
+            'Documenté el flujo de ramas, el despliegue y los controles de seguridad según OWASP Top 10.',
+            'Lo desarrollé con asistencia de IA, definiendo y revisando cada decisión técnica.',
+          ],
+          stack: [
+            { name: 'React + TypeScript', use: 'interfaz por páginas, bilingüe y con tema claro y oscuro' },
+            { name: 'Tailwind CSS + GSAP', use: 'sistema de diseño y animaciones' },
+            { name: 'NestJS', use: 'API REST modular' },
+            { name: 'Vitest + Supertest', use: 'tests unitarios y end-to-end de la API' },
+            { name: 'Docker', use: 'mismo entorno en desarrollo y en producción' },
+            { name: 'GitHub Actions', use: 'integración y despliegue continuo' },
+          ],
+          repo: repos.portfolio,
         },
         {
           name: 'Gestión de Gimnasio',
-          kind: 'Aplicación de escritorio',
-          summary: 'Sistema para administrar la información de un gimnasio.',
-          role: 'Diseñé el modelo de datos, las funcionalidades de alta, baja y modificación, y las consultas SQL con JOIN que integran la información.',
-          stack: ['Java', 'MySQL', 'SQL'],
+          kind: 'Aplicación de escritorio · trabajo de la carrera',
+          problem:
+            'Un gimnasio necesita administrar socios, profesores, pagos, productos y rutinas desde un solo lugar.',
+          solution:
+            'Una aplicación de escritorio con un menú distinto según el rol de quien ingresa (administrador, profesor o cliente), sobre una base de datos relacional.',
+          contribution: [
+            'Diseñé el modelo de datos en MySQL, con claves foráneas e índices.',
+            'Implementé altas, bajas y modificaciones con borrado lógico, para no perder el historial.',
+            'Escribí consultas SQL con JOIN que cruzan usuarios, clientes y profesores.',
+            'Usé transacciones en el registro de usuarios para que la base quede siempre consistente.',
+            'Integré una API externa de ejercicios para armar el catálogo de rutinas.',
+          ],
+          stack: [
+            { name: 'Java (Swing)', use: 'interfaz de escritorio con navegación según el rol' },
+            { name: 'JDBC', use: 'consultas parametrizadas y transacciones' },
+            { name: 'MySQL', use: 'modelo relacional con claves foráneas e índices' },
+            { name: 'API REST externa', use: 'catálogo de ejercicios' },
+          ],
           repo: repos.gym,
         },
         {
-          name: 'Este portfolio',
-          kind: 'Aplicación full stack',
-          summary:
-            'El sitio que estás viendo: front animado, API propia y todo el entorno en contenedores.',
-          role: 'Definí el stack, la arquitectura de ramas y los criterios de seguridad, y lo construí con desarrollo asistido por IA.',
-          stack: ['React', 'TypeScript', 'Tailwind', 'NestJS', 'PostgreSQL', 'Docker'],
-          repo: repos.portfolio,
+          name: 'Sistema de Facturación',
+          kind: 'Aplicación de escritorio · trabajo de la carrera',
+          problem:
+            'Un comercio necesita registrar ventas, controlar el stock y emitir facturas con el detalle de cada producto.',
+          solution:
+            'Una aplicación de escritorio con inicio de sesión por rol y módulos de clientes, empleados, proveedores, stock y facturación.',
+          contribution: [
+            'Modelé la base de datos relacional: facturas, detalle por producto, stock y proveedores.',
+            'Implementé altas, bajas y modificaciones en cada módulo.',
+            'Resolví la emisión de la factura y el descuento de stock dentro de una misma transacción.',
+            'Integré Java con MySQL mediante JDBC, con consultas parametrizadas.',
+          ],
+          stack: [
+            { name: 'Java (Swing)', use: 'interfaz de escritorio por módulos' },
+            { name: 'JDBC', use: 'conexión, consultas parametrizadas y transacciones' },
+            { name: 'MySQL', use: 'modelo relacional de facturas, productos y stock' },
+            { name: 'SQL', use: 'consultas con JOIN entre stock, proveedores y estados' },
+          ],
+        },
+        {
+          name: 'JosBy',
+          kind: 'Plataforma web · equipo de cinco personas',
+          problem:
+            'Freelancers y empresas necesitan un lugar donde encontrarse, publicar servicios y gestionar pedidos.',
+          solution:
+            'Una plataforma web con perfiles, publicación de servicios, pedidos y chat en tiempo real, desarrollada en equipo.',
+          contribution: [
+            'Desarrollé la página de perfil y la edición de datos personales.',
+            'Hice la ventana para cargar y cambiar la foto de perfil.',
+            'Sumé el flujo para que un usuario pase a ser freelancer, en el front y en la API.',
+          ],
+          stack: [
+            { name: 'React', use: 'vistas de perfil, edición y carga de imagen' },
+            { name: 'Tailwind CSS', use: 'estilos de esas vistas' },
+            { name: 'Node.js + Express', use: 'endpoint para convertir un usuario en freelancer' },
+            { name: 'MongoDB', use: 'datos del perfil de usuario' },
+          ],
+          repo: repos.josby,
         },
       ],
     },
@@ -216,10 +296,26 @@ export const content: Record<Language, Content> = {
       ],
       stackTitle: 'Con qué trabajo',
       stackGroups: [
-        { label: 'Front', items: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Tailwind CSS'] },
-        { label: 'Back', items: ['Node.js', 'NestJS', 'Java', 'APIs REST'] },
-        { label: 'Datos', items: ['MySQL', 'PostgreSQL', 'MongoDB'] },
-        { label: 'Herramientas', items: ['Git', 'GitHub', 'Docker', 'Postman', 'Jira', 'Trello'] },
+        {
+          label: 'Front',
+          items: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Tailwind CSS'],
+          evidence: 'Usado en este portfolio y en JosBy',
+        },
+        {
+          label: 'Back',
+          items: ['Node.js', 'NestJS', 'Java', 'APIs REST'],
+          evidence: 'API de este portfolio, JosBy, Gimnasio y Facturación',
+        },
+        {
+          label: 'Datos',
+          items: ['MySQL', 'MongoDB', 'SQL'],
+          evidence: 'MySQL en Gimnasio y Facturación, MongoDB en JosBy',
+        },
+        {
+          label: 'Herramientas',
+          items: ['Git', 'GitHub', 'Docker', 'GitHub Actions', 'Postman', 'Jira', 'Trello'],
+          evidence: 'Docker y GitHub Actions en el despliegue de este portfolio',
+        },
         { label: 'Forma de trabajo', items: ['Scrum', 'QA funcional', 'Desarrollo asistido por IA'] },
       ],
     },
@@ -230,7 +326,7 @@ export const content: Record<Language, Content> = {
       elsewhereLabel: 'También estoy en',
     },
     footer: {
-      note: 'Analista de sistemas y desarrolladora full stack',
+      note: 'Desarrolladora full stack junior · Analista de sistemas',
     },
   },
   en: {
@@ -248,10 +344,10 @@ export const content: Record<Language, Content> = {
       languageLabel: 'Language',
     },
     hero: {
-      roles: ['Systems analyst', 'Full stack developer', 'AI-assisted development'],
-      intro: 'I build web apps and automations end to end, with AI as an everyday working tool.',
+      roles: ['Junior Full Stack Developer', 'Systems Analyst', 'Java · React · Node.js · MySQL'],
+      intro: 'I build applications end to end: database, API and interface, with AI as a working tool.',
       primaryCta: 'View projects',
-      secondaryCta: 'Contact',
+      secondaryCta: 'View GitHub',
     },
     home: {
       projectsTitle: 'Projects',
@@ -265,39 +361,101 @@ export const content: Record<Language, Content> = {
     },
     projects: {
       title: 'Projects',
-      intro: 'Training and personal work. For each one I explain what it solves and which part I built.',
-      roleLabel: 'My part',
-      repoLabel: 'View repository',
+      intro:
+        'For each one: the problem it solves, how I solved it, which part I built and what I used each technology for.',
+      featuredLabel: 'Featured',
+      problemLabel: 'Problem',
+      solutionLabel: 'Solution',
+      contributionLabel: 'My contribution',
+      stackLabel: 'Technologies and what for',
+      repoLabel: 'GitHub',
+      demoLabel: 'Demo',
+      repoPending: 'Repository coming soon',
       items: [
         {
-          name: 'JosBy',
-          kind: 'Web platform, team project',
-          summary: 'A platform that connects freelancers with companies looking to hire services.',
-          role: 'I built the user profiles, with personal data editing and image upload, and helped build the interfaces where freelancers and companies interact.',
-          stack: ['MongoDB', 'Express', 'React', 'Node.js'],
-        },
-        {
-          name: 'Billing System',
-          kind: 'Desktop application',
-          summary: 'A system to issue and look up invoices on a relational database.',
-          role: 'I modeled the database, implemented create, update and delete operations, and solved the integration between Java and MySQL.',
-          stack: ['Java', 'MySQL', 'SQL'],
+          name: 'This portfolio',
+          kind: 'Full stack application · personal project',
+          featured: true,
+          problem:
+            'I needed a site of my own, published and easy to maintain, that would also show how I write code.',
+          solution:
+            'A React front end separated from a NestJS API, fully containerized with Docker and continuously deployed: every change is verified and published automatically.',
+          contribution: [
+            'Defined the architecture: static front end on GitHub Pages and the API in a Docker container on Render.',
+            'Built the GitHub Actions pipeline: lint, types, tests, Docker image and deployment on every push.',
+            'Wrote unit and end-to-end tests for the API.',
+            'Documented the branching flow, the deployment and the security controls based on the OWASP Top 10.',
+            'Built it with AI assistance, defining and reviewing every technical decision.',
+          ],
+          stack: [
+            { name: 'React + TypeScript', use: 'multi-page, bilingual interface with light and dark themes' },
+            { name: 'Tailwind CSS + GSAP', use: 'design system and animations' },
+            { name: 'NestJS', use: 'modular REST API' },
+            { name: 'Vitest + Supertest', use: 'unit and end-to-end API tests' },
+            { name: 'Docker', use: 'same environment in development and production' },
+            { name: 'GitHub Actions', use: 'continuous integration and deployment' },
+          ],
+          repo: repos.portfolio,
         },
         {
           name: 'Gym Management',
-          kind: 'Desktop application',
-          summary: "A system to manage a gym's information.",
-          role: 'I designed the data model, the create, update and delete features, and the SQL JOIN queries that bring the data together.',
-          stack: ['Java', 'MySQL', 'SQL'],
+          kind: 'Desktop application · degree project',
+          problem: 'A gym needs to manage members, trainers, payments, products and routines in one place.',
+          solution:
+            'A desktop application with a different menu for each role (administrator, trainer or member), on top of a relational database.',
+          contribution: [
+            'Designed the MySQL data model, with foreign keys and indexes.',
+            'Implemented create, update and delete operations with soft deletes to keep history.',
+            'Wrote SQL JOIN queries that bring together users, members and trainers.',
+            'Used transactions in user sign-up so the database always stays consistent.',
+            'Integrated an external exercise API to build the routines catalog.',
+          ],
+          stack: [
+            { name: 'Java (Swing)', use: 'desktop interface with role-based navigation' },
+            { name: 'JDBC', use: 'parameterized queries and transactions' },
+            { name: 'MySQL', use: 'relational model with foreign keys and indexes' },
+            { name: 'External REST API', use: 'exercise catalog' },
+          ],
           repo: repos.gym,
         },
         {
-          name: 'This portfolio',
-          kind: 'Full stack application',
-          summary: 'The site you are looking at: animated front end, its own API and a fully containerized setup.',
-          role: 'I defined the stack, the branching strategy and the security criteria, and built it with AI-assisted development.',
-          stack: ['React', 'TypeScript', 'Tailwind', 'NestJS', 'PostgreSQL', 'Docker'],
-          repo: repos.portfolio,
+          name: 'Billing System',
+          kind: 'Desktop application · degree project',
+          problem:
+            'A store needs to record sales, keep stock under control and issue invoices with the detail of each product.',
+          solution:
+            'A desktop application with role-based login and modules for customers, employees, suppliers, stock and billing.',
+          contribution: [
+            'Modeled the relational database: invoices, per-product detail, stock and suppliers.',
+            'Implemented create, update and delete operations in every module.',
+            'Handled invoice creation and the stock update inside a single transaction.',
+            'Integrated Java and MySQL through JDBC with parameterized queries.',
+          ],
+          stack: [
+            { name: 'Java (Swing)', use: 'module-based desktop interface' },
+            { name: 'JDBC', use: 'connection, parameterized queries and transactions' },
+            { name: 'MySQL', use: 'relational model for invoices, products and stock' },
+            { name: 'SQL', use: 'JOIN queries across stock, suppliers and statuses' },
+          ],
+        },
+        {
+          name: 'JosBy',
+          kind: 'Web platform · team of five',
+          problem: 'Freelancers and companies need a place to meet, publish services and manage orders.',
+          solution:
+            'A web platform with profiles, service listings, orders and real-time chat, built as a team.',
+          contribution: [
+            'Built the profile page and the personal data editing.',
+            'Built the modal to upload and change the profile picture.',
+            'Added the flow that turns a user into a freelancer, in the front end and the API.',
+          ],
+          stack: [
+            { name: 'React', use: 'profile, editing and image upload views' },
+            { name: 'Tailwind CSS', use: 'styling for those views' },
+            { name: 'Node.js + Express', use: 'endpoint that turns a user into a freelancer' },
+            { name: 'MongoDB', use: 'user profile data' },
+          ],
+          repo: repos.josby,
         },
       ],
     },
@@ -349,10 +507,26 @@ export const content: Record<Language, Content> = {
       ],
       stackTitle: 'What I work with',
       stackGroups: [
-        { label: 'Front end', items: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Tailwind CSS'] },
-        { label: 'Back end', items: ['Node.js', 'NestJS', 'Java', 'REST APIs'] },
-        { label: 'Data', items: ['MySQL', 'PostgreSQL', 'MongoDB'] },
-        { label: 'Tools', items: ['Git', 'GitHub', 'Docker', 'Postman', 'Jira', 'Trello'] },
+        {
+          label: 'Front end',
+          items: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Tailwind CSS'],
+          evidence: 'Used in this portfolio and in JosBy',
+        },
+        {
+          label: 'Back end',
+          items: ['Node.js', 'NestJS', 'Java', 'REST APIs'],
+          evidence: 'This portfolio API, JosBy, Gym Management and Billing System',
+        },
+        {
+          label: 'Data',
+          items: ['MySQL', 'MongoDB', 'SQL'],
+          evidence: 'MySQL in Gym Management and Billing System, MongoDB in JosBy',
+        },
+        {
+          label: 'Tools',
+          items: ['Git', 'GitHub', 'Docker', 'GitHub Actions', 'Postman', 'Jira', 'Trello'],
+          evidence: 'Docker and GitHub Actions in this portfolio deployment',
+        },
         { label: 'Ways of working', items: ['Scrum', 'Functional QA', 'AI-assisted development'] },
       ],
     },
@@ -363,7 +537,7 @@ export const content: Record<Language, Content> = {
       elsewhereLabel: 'You can also find me on',
     },
     footer: {
-      note: 'Systems analyst and full stack developer',
+      note: 'Junior full stack developer · Systems analyst',
     },
   },
 }
