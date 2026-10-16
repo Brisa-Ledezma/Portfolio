@@ -60,6 +60,34 @@ En GitHub, **Settings → Secrets and variables → Actions**:
 
 Mientras falte el deploy hook, el pipeline igual verifica todo, publica la imagen y despliega el front; solo deja un aviso de que la API no se desplegó.
 
+### 4. Formulario de contacto
+
+El formulario envía los mensajes a la API por WebSocket. La API los guarda en PostgreSQL y avisa cada uno por mail. Necesita estas variables de entorno en Render (**Environment** del servicio):
+
+| Variable | Valor | Para qué |
+|---|---|---|
+| `CORS_ORIGIN` | `https://brisa-ledezma.github.io` | Único origen desde el que la API acepta conexiones |
+| `DATABASE_URL` | La cadena de conexión de Neon | Guardar los mensajes |
+| `SMTP_USER` | La dirección de Gmail que envía el aviso | Aviso por mail |
+| `SMTP_PASS` | Una contraseña de aplicación de Gmail | Aviso por mail |
+| `MAIL_TO` | La dirección que recibe el aviso | Aviso por mail |
+
+**Base de datos (Neon):**
+
+1. Crear una cuenta en [neon.tech](https://neon.tech) entrando con GitHub y un proyecto en la región **AWS US East (N. Virginia)**, la misma zona que Render.
+2. Copiar la cadena de conexión (**Connection string**) y cargarla en Render como `DATABASE_URL`.
+3. Al arrancar, la API aplica sola las migraciones pendientes ([back/docker-entrypoint.sh](../back/docker-entrypoint.sh)).
+
+**Mail (Gmail):**
+
+1. La cuenta de Gmail necesita la verificación en dos pasos activada.
+2. En [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) crear una contraseña de aplicación llamada "Portfolio".
+3. Cargarla en Render como `SMTP_PASS`. Nunca usar la contraseña normal de la cuenta.
+
+El mail de aviso llega con el **Reply-To** de quien escribió: tocar "Responder" le contesta directamente.
+
+Cada parte es opcional: sin base los mensajes solo se avisan por mail, y sin mail solo se guardan. Sin ninguna de las dos, el formulario le indica a la persona que escriba directo al mail.
+
 ## Por qué la API casi no se duerme
 
 El plan gratuito de Render apaga la API tras 15 minutos sin tráfico y tarda cerca de un minuto en encenderla. Hay dos medidas:

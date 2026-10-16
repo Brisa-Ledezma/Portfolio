@@ -28,6 +28,11 @@ services:
     environment:
       PORT: 3000
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      CORS_ORIGIN: http://localhost:5173
+      # Aviso por mail del formulario de contacto (opcional en desarrollo).
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      MAIL_TO: ${MAIL_TO:-}
       TSC_WATCHFILE: DynamicPriorityPolling
     volumes:
       - ./back:/app
