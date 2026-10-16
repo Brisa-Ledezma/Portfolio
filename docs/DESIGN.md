@@ -31,7 +31,7 @@ Reglas:
 
 ## Marca
 
-El logo es el monograma "BL": una L dorada, fina y alta, que enmarca una B beige con las esquinas cortadas a 45°, sobre un cuadrado bordó con degradé. Aparece en el encabezado y en el pie, que es compacto: logo, nombre y enlaces. El destello ✦ dorado se usa como separador. Reglas de uso, colores y archivos en [BRAND.md](BRAND.md).
+El logo es el monograma "LB" dorado sobre bordó: una L de fuste grueso y una B que se encastra sobre su pie. Aparece en el encabezado y en el pie, que es compacto: logo, nombre y enlaces. El destello ✦ dorado se usa como separador. Reglas de uso, colores y archivos en [BRAND.md](BRAND.md).
 
 ## Zoom y tamaños de pantalla
 

@@ -2,22 +2,21 @@
 
 ## Logo
 
-El monograma **BL** combina dos trazos:
+El monograma **LB** está dibujado a medida, inspirado en los monogramas editoriales de alto contraste:
 
-- **La L**, dorada, fina y alta. Enmarca a la B y su pie funciona como línea de base de todo el signo.
-- **La B**, en beige y con trazo grueso. Las esquinas de sus curvas están cortadas a 45°, como las pistas de un circuito impreso: mantiene la forma clásica de la letra y suma un guiño técnico, sin llegar a lo pixelado.
-
-El contraste entre un trazo fino y uno grueso viene de los monogramas tradicionales; el corte en chaflán lo lleva a la tecnología.
+- **La L** tiene un fuste grueso, remate superior y pie fino.
+- **La B** nace con un trazo fino apoyado sobre el pie de la L. Su panza superior queda arriba de ese pie y la inferior, con el lado izquierdo en diagonal, cuelga por debajo: las dos letras se encastran en una sola figura.
+- **Color:** letras en dorado con degradé sobre un cuadrado bordó, los dos colores principales de la marca.
 
 | Archivo | Uso |
 |---|---|
-| [front/public/favicon.svg](../front/public/favicon.svg) | Ícono de la pestaña del navegador |
+| [front/public/favicon.svg](../front/public/favicon.svg) | Ícono de la pestaña del navegador (trazos finos un poco engrosados para que se lean en 16 px) |
 | [front/src/components/brand/Logo.tsx](../front/src/components/brand/Logo.tsx) | Logo dentro del sitio (encabezado y pie) |
 
 ### Versiones
 
 - **Con fondo** (cuadrado bordó con esquinas redondeadas): la versión principal. Es la que se usa en el sitio y como avatar.
-- **Sin fondo**: solo los trazos, sobre fondos oscuros (`#121113` o bordó). No usar sobre fondos claros sin el cuadrado, porque la B beige pierde contraste.
+- **Sin fondo**: solo las letras doradas, sobre fondos oscuros (`#121113` o bordó). Sobre fondo claro, usar las letras en bordó.
 
 ### Reglas
 
